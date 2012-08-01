@@ -1,6 +1,7 @@
 module Sprites where
 
 import Graphics.UI.SDL as SDL
+import Graphics.UI.SDL.Image as SDLImage
 
 import Mechanics
 
@@ -14,6 +15,11 @@ data Spritesheet = Spritesheet {
 
 data Graphics_State = Stationary | Moving | Attacking | Casting1 | Casting2 deriving (Show, Read, Enum, Ord, Eq)
 
+load_spritesheet :: FilePath -> Spritesheet_Meta -> IO Spritesheet
+load_spritesheet filepath meta = do
+	image <- SDLImage.loadTyped filepath SDLImage.PNG
+	return $ Spritesheet image meta
+
 get_sprite_coords :: Graphics_State -> Dir -> Spritesheet -> Maybe [Sprite_Coords]
 get_sprite_coords graphics_state dir spritesheet = do
 	let meta = spritesheet_meta spritesheet
@@ -22,4 +28,3 @@ get_sprite_coords graphics_state dir spritesheet = do
 
 t :: Spritesheet_Meta
 t = [ (Stationary, [ (N, [(0,0,50,50)] ) ] ) ]
-

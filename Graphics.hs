@@ -6,9 +6,6 @@ import Graphics.UI.SDL.Image as SDLImage
 import Mechanics
 import Sprites
 
-load_spritesheet :: IO ()
-load_spritesheet = return ()
-
 initialize_graphics :: IO (Maybe Surface)
 initialize_graphics = do
 	SDL.init [InitEverything]
